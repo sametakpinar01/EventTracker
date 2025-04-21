@@ -1,0 +1,53 @@
+﻿@model EventTracker.Models.EventModel
+
+@{
+    // Sayfa başlığı ayarlanıyor
+    ViewData["Title"] = "Etkinlik Düzenle";
+}
+
+<h1>Etkinlik Düzenle</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <!-- Model doğrulama hatalarını göstermek için özet -->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <!-- Gizli alan: Etkinlik ID'si -->
+            <input type="hidden" asp-for="Id" />
+
+            <!-- Etkinlik başlığı için giriş alanı -->
+            <div class="form-group mb-3">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <!-- Etkinlik açıklaması için giriş alanı -->
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <!-- Etkinlik tarihi için giriş alanı -->
+            <div class="form-group mb-3">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" type="date" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+
+            <!-- Form gönderme ve iptal butonları -->
+            <div class="form-group mb-3">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+                <a asp-action="List" class="btn btn-secondary">İptal</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        // Doğrulama scriptlerini dahil et
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
